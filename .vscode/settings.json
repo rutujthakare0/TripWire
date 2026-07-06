@@ -1,0 +1,6 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\sidd5\\OneDrive\\Desktop\\TripWire\\tripwire\\venv\\Scripts\\python.exe",
+  "python.analysis.extraPaths": [
+    "C:\\Users\\sidd5\\OneDrive\\Desktop\\TripWire\\tripwire\\venv\\Lib\\site-packages"
+  ]
+}
