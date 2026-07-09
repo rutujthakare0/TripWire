@@ -4,4 +4,4 @@ global:
 scrape_configs:
   - job_name: "sample-app"
     static_configs:
-      - targets: ["host.docker.internal:5000"]
+      - targets: ["sample-app-v1:5000", "sample-app-v2:5000"]

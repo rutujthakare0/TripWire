@@ -41,7 +41,7 @@ def process():
     if CHAOS_MODE == "latency":
         time.sleep(random.uniform(0.8, 2.5))
 
-    elif CHAOS_MODE == "errors":
+    elif CHAOS_MODE == "error":
         if random.random() < 0.4:
             duration = time.time() - start
             REQUEST_LATENCY.labels(endpoint="/process",version=VERSION).observe(duration)

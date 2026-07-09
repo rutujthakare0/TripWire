@@ -24,5 +24,5 @@ def set_traffic(v1_weight=None, v2_weight=None):
 
 def reload_nginx():
 
-    nginx = client.containers.get("tripwire-nginx-1")
+    nginx = client.containers.get("tripwire-nginx")
     nginx.exec_run("nginx -s reload")
