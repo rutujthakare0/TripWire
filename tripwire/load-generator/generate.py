@@ -1,14 +1,14 @@
 import requests
-import time
 import random
+import time
 
-URL = "http://localhost:5000/process"
+URL="http://nginx/process"
 
 while True:
     try:
         r = requests.get(URL)
-        print(r.json())
+        print(r.status_code)
     except Exception as e:
-        print("error:", e)
+        print(e)
 
-    time.sleep(random.uniform(0.1, 0.5))
+    time.sleep(random.uniform(0.1,0.5))

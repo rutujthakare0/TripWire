@@ -1,0 +1,9 @@
+PROMETHEUS_URL = "http://prometheus:9090"
+
+CONTROLLER_URL = "http://controller:8000"
+
+LATENCY_THRESHOLD = 0.5
+
+ERROR_THRESHOLD = 0.20
+
+CHECK_INTERVAL = 15

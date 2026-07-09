@@ -10,13 +10,13 @@ app = Flask(__name__)
 REQUEST_COUNT = Counter(
     'http_requests_total',
     'Total HTTP requests',
-    ['method', 'endpoint', 'status']
+    ['method', 'endpoint', 'status','version']
 )
 
 REQUEST_LATENCY = Histogram(
     'http_request_duration_seconds',
     'Request latency',
-    ['endpoint'],
+    ['endpoint','version'],
     buckets=[0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5]
 )
 
@@ -44,8 +44,8 @@ def process():
     elif CHAOS_MODE == "errors":
         if random.random() < 0.4:
             duration = time.time() - start
-            REQUEST_LATENCY.labels(endpoint="/process").observe(duration)
-            REQUEST_COUNT.labels(method="GET", endpoint="/process", status="500").inc()
+            REQUEST_LATENCY.labels(endpoint="/process",version=VERSION).observe(duration)
+            REQUEST_COUNT.labels(method="GET",endpoint="/process",status="500",version=VERSION).inc()
             return jsonify({"error": "failure"}), 500
 
     # ---- normal execution ----
@@ -53,8 +53,8 @@ def process():
 
     duration = time.time() - start
 
-    REQUEST_LATENCY.labels(endpoint="/process").observe(duration)
-    REQUEST_COUNT.labels(method="GET", endpoint="/process", status="200").inc()
+    REQUEST_LATENCY.labels(endpoint="/process",version=os.getenv("APP_VERSION")).observe(duration)
+    REQUEST_COUNT.labels(method="GET", endpoint="/process", status="200",version=os.getenv("APP_VERSION")).inc()
 
     return jsonify({
         "result": "processed",

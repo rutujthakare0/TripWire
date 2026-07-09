@@ -6,3 +6,4 @@ venv/
 .terraform/
 *.tfstate
 *.tfstate.backup
+.vscode
