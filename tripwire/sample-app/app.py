@@ -70,5 +70,5 @@ def metrics():
 
 
 if __name__ == "__main__":
-    print(f"Starting app | version={VERSION} | chaos={CHAOS_MODE}")
+    print(f"Starting app now | version={VERSION} | chaos={CHAOS_MODE}")
     app.run(host="0.0.0.0", port=5000)
