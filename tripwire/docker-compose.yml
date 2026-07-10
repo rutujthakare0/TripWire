@@ -1,7 +1,8 @@
 services:
   sample-app-v1:
     build: ./sample-app
-    image: tripwire/sample-app:latest
+    image: tripwire/sample-app:stable
+    container_name: sample-app-v1
     environment:
       APP_VERSION: v1
       CHAOS_MODE: none
@@ -27,9 +28,6 @@ services:
       - prometheus
     networks:
       - tripwire
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
 
   load-generator:
     build: ./load-generator
@@ -73,4 +71,3 @@ services:
 networks:
   tripwire:
     name: tripwire
-

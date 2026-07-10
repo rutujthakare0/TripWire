@@ -1,0 +1,25 @@
+name: Tripwire CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tripwire/sample-app/**'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build new image
+        shell: cmd
+        run: |
+          docker build -t tripwire/sample-app:${{ github.sha }} ./tripwire/sample-app
+
+      - name: Trigger canary deploy
+        shell: cmd
+        run: |
+          curl -f -X POST http://localhost:8000/deploy -H "Content-Type: application/json" -d "{\"image\": \"tripwire/sample-app:${{ github.sha }}\"}"
