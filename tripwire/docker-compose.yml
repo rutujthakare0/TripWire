@@ -28,6 +28,9 @@ services:
       - prometheus
     networks:
       - tripwire
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
 
   load-generator:
     build: ./load-generator
