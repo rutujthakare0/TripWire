@@ -21,9 +21,8 @@ histogram_quantile(
 sum(rate(http_request_duration_seconds_bucket{{version="{version}"}}[1m])) by (le))
 """
 
-    data = query(query_str)
-
     try:
+        data = query(query_str)
         result = data["data"]["result"]
 
         if not result:
@@ -31,7 +30,8 @@ sum(rate(http_request_duration_seconds_bucket{{version="{version}"}}[1m])) by (l
 
         return float(result[0]["value"][1])
 
-    except Exception:
+    except Exception as e:
+        print(f"[get_latency:{version}] query failed: {e}")
         return 0.0
 
 
@@ -43,9 +43,8 @@ rate(http_requests_total{{version="{version}",status="500"}}[1m])
 rate(http_requests_total{{version="{version}"}}[1m])
 """
 
-    data = query(query_str)
-
     try:
+        data = query(query_str)
         result = data["data"]["result"]
 
         if not result:
@@ -53,5 +52,6 @@ rate(http_requests_total{{version="{version}"}}[1m])
 
         return float(result[0]["value"][1])
 
-    except Exception:
+    except Exception as e:
+        print(f"[get_error_rate:{version}] query failed: {e}")
         return 0.0
